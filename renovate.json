@@ -1,0 +1,8 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Self-renovate config for this preset repo. Uses its own default preset.",
+  "extends": [
+    "local>arisu-archive/renovate-config",
+    "local>arisu-archive/renovate-config:github-actions"
+  ]
+}
