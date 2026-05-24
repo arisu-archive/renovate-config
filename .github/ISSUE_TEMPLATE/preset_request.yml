@@ -1,0 +1,29 @@
+name: Preset change request
+description: Propose a new preset, a new rule, or a policy change.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What dependency-management pain are you hitting today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Which preset would change, and what would the new rule look like? Include JSON if possible.
+    validations:
+      required: true
+  - type: textarea
+    id: blast_radius
+    attributes:
+      label: Blast radius
+      description: Which consumer repos are affected? Estimated PR volume change?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

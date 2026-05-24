@@ -1,0 +1,38 @@
+name: Bug report
+description: Renovate behavior on a consumer repo does not match the preset's stated policy.
+labels: [bug]
+body:
+  - type: input
+    id: consumer_repo
+    attributes:
+      label: Consumer repo
+      description: Repo where the wrong behavior was observed.
+      placeholder: arisu-archive/example-service
+    validations:
+      required: true
+  - type: input
+    id: renovate_run
+    attributes:
+      label: Renovate run / PR link
+      description: Link to the Renovate log or the offending PR.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What the preset says should happen.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What Renovate actually did.
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional context
+      description: Local overrides, custom managers, anything unusual in the consumer repo.
