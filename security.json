@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Security policy. Vulnerability alerts run any time, bypass schedule, no soak window, high priority. OSV-backed.",
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["security", "dependencies"],
+    "schedule": ["at any time"],
+    "minimumReleaseAge": "0 days",
+    "prPriority": 10,
+    "automerge": false,
+    "addLabels": ["security"],
+    "commitMessagePrefix": "fix(security):",
+    "prCreation": "immediate"
+  },
+  "osvVulnerabilityAlerts": true,
+  "transitiveRemediation": true
+}

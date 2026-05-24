@@ -1,0 +1,13 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Default org-wide Renovate preset. Language-agnostic baseline. Extend language presets separately (e.g. local>arisu-archive/renovate-config:golang).",
+  "extends": [
+    "config:best-practices",
+    ":semanticCommits",
+    "local>arisu-archive/renovate-config:base",
+    "local>arisu-archive/renovate-config:schedule",
+    "local>arisu-archive/renovate-config:grouping",
+    "local>arisu-archive/renovate-config:automerge",
+    "local>arisu-archive/renovate-config:security"
+  ]
+}

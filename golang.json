@@ -1,0 +1,158 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Go module rules. Tidies go.sum/go.mod after updates, groups indirect deps, enforces toolchain compatibility.",
+  "postUpdateOptions": ["gomodTidy", "gomodUpdateImportPaths"],
+  "packageRules": [
+    {
+      "description": "Group Go indirect dependencies (rarely interesting individually)",
+      "matchManagers": ["gomod"],
+      "matchDepTypes": ["indirect"],
+      "groupName": "go indirect dependencies",
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash",
+      "schedule": ["before 6am on monday"]
+    },
+    {
+      "description": "Group Go direct non-major dependencies",
+      "matchManagers": ["gomod"],
+      "matchDepTypes": ["require"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "go direct dependencies (non-major)"
+    },
+    {
+      "description": "Filter Go updates incompatible with project toolchain version",
+      "matchManagers": ["gomod"],
+      "constraintsFiltering": "strict"
+    },
+    {
+      "description": "Separate Go toolchain (golang/go) updates",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": ["go", "golang.org/toolchain"],
+      "groupName": "go toolchain",
+      "automerge": false,
+      "labels": ["dependencies", "go-toolchain"]
+    },
+    {
+      "description": "Group Ginkgo + Gomega test framework",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": [
+        "github.com/onsi/ginkgo{/,}**",
+        "github.com/onsi/gomega{/,}**"
+      ],
+      "groupName": "ginkgo/gomega"
+    },
+    {
+      "description": "Group OpenTelemetry modules (lockstep versioning required)",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": [
+        "go.opentelemetry.io/**"
+      ],
+      "groupName": "opentelemetry"
+    },
+    {
+      "description": "Group Kubernetes client-go family (strict version matrix)",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": [
+        "k8s.io/**",
+        "sigs.k8s.io/**"
+      ],
+      "groupName": "kubernetes"
+    },
+    {
+      "description": "Group gRPC + protobuf + genproto (codegen compatibility)",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": [
+        "google.golang.org/grpc{/,}**",
+        "google.golang.org/protobuf{/,}**",
+        "google.golang.org/genproto{/,}**"
+      ],
+      "groupName": "grpc/protobuf"
+    },
+    {
+      "description": "Group AWS SDK v2 (core + service clients)",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": [
+        "github.com/aws/aws-sdk-go-v2{/,}**",
+        "github.com/aws/smithy-go{/,}**"
+      ],
+      "groupName": "aws-sdk-go-v2"
+    },
+    {
+      "description": "Group Google Cloud SDK modules",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": [
+        "cloud.google.com/go{/,}**"
+      ],
+      "groupName": "google-cloud-go"
+    },
+    {
+      "description": "Group golang.org/x/* stdlib extensions",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": [
+        "golang.org/x/**"
+      ],
+      "groupName": "golang.org/x"
+    },
+    {
+      "description": "Group uber-go modules (zap, atomic, multierr, fx)",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": [
+        "go.uber.org/**"
+      ],
+      "groupName": "uber-go"
+    },
+    {
+      "description": "Group Prometheus client + common + procfs",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": [
+        "github.com/prometheus/client_golang{/,}**",
+        "github.com/prometheus/client_model{/,}**",
+        "github.com/prometheus/common{/,}**",
+        "github.com/prometheus/procfs{/,}**"
+      ],
+      "groupName": "prometheus"
+    },
+    {
+      "description": "Group GORM core + drivers",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": [
+        "gorm.io/**"
+      ],
+      "groupName": "gorm"
+    },
+    {
+      "description": "Group HashiCorp libraries",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": [
+        "github.com/hashicorp/**"
+      ],
+      "groupName": "hashicorp"
+    },
+    {
+      "description": "Group testcontainers-go core + modules",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": [
+        "github.com/testcontainers/testcontainers-go{/,}**"
+      ],
+      "groupName": "testcontainers-go"
+    },
+    {
+      "description": "Group Go linter dependencies",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": [
+        "github.com/golangci/golangci-lint{/,}**",
+        "honnef.co/go/tools{/,}**"
+      ],
+      "groupName": "go linters"
+    },
+    {
+      "description": "Group testify test framework",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": [
+        "github.com/stretchr/testify{/,}**"
+      ],
+      "groupName": "testify"
+    }
+  ]
+}

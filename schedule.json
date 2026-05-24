@@ -1,0 +1,20 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Update schedule: weekly Monday early morning Asia/Hong_Kong. Security updates run any time.",
+  "schedule": ["before 6am on monday"],
+  "updateNotScheduled": false,
+  "packageRules": [
+    {
+      "description": "Lockfile maintenance weekly on Monday",
+      "matchUpdateTypes": ["lockFileMaintenance"],
+      "schedule": ["before 6am on monday"]
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true,
+    "automergeType": "pr",
+    "automergeStrategy": "squash",
+    "schedule": ["before 6am on monday"]
+  }
+}

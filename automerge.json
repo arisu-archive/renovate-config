@@ -1,0 +1,46 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Automerge policy. Conservative: patch/minor/pin/digest only, after CI passes, with minimum release age soak window.",
+  "extends": [":automergePr", ":automergeRequireAllStatusChecks"],
+  "platformAutomerge": true,
+  "minimumReleaseAge": "7 days",
+  "packageRules": [
+    {
+      "description": "Automerge patch, pin, digest updates after CI",
+      "matchUpdateTypes": ["patch", "pin", "digest"],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
+    },
+    {
+      "description": "Automerge minor updates after CI",
+      "matchUpdateTypes": ["minor"],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
+    },
+    {
+      "description": "Never automerge major updates — manual review required",
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "labels": ["dependencies", "breaking-change"]
+    },
+    {
+      "description": "Extended soak window for third-party direct minor/patch updates",
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchDepTypes": ["require", "dependencies", "devDependencies"],
+      "minimumReleaseAge": "14 days"
+    },
+    {
+      "description": "Block automerge for known high-risk ecosystems regardless of update type",
+      "matchPackageNames": [
+        "/postgres/",
+        "/mongodb/",
+        "/redis/",
+        "/kafka/"
+      ],
+      "automerge": false,
+      "labels": ["dependencies", "needs-review"]
+    }
+  ]
+}

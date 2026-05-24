@@ -1,0 +1,33 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Docker rules. Pins image digests for reproducibility, groups image updates, separates major image bumps.",
+  "packageRules": [
+    {
+      "description": "Pin Docker digests and group dockerfile updates",
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "groupName": "docker dependencies",
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash",
+      "pinDigests": true
+    },
+    {
+      "description": "Separate major Docker base image updates",
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "matchUpdateTypes": ["major"],
+      "groupName": null,
+      "automerge": false,
+      "labels": ["dependencies", "docker", "breaking-change"]
+    },
+    {
+      "description": "Distroless and chiselled images: trust upstream, fast automerge",
+      "matchManagers": ["dockerfile"],
+      "matchPackageNames": [
+        "/gcr.io/distroless//",
+        "/cgr.dev/chainguard//"
+      ],
+      "automerge": true,
+      "minimumReleaseAge": "3 days"
+    }
+  ]
+}

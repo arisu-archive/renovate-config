@@ -1,0 +1,105 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Node.js/npm rules. Groups ecosystem packages, manages lockfiles, scopes updates by dependency type.",
+  "packageRules": [
+    {
+      "description": "Group ESLint core + plugins + configs",
+      "matchManagers": ["npm"],
+      "matchPackageNames": [
+        "eslint",
+        "eslint-*",
+        "@eslint/**",
+        "@typescript-eslint/**"
+      ],
+      "groupName": "eslint"
+    },
+    {
+      "description": "Group Prettier core + plugins",
+      "matchManagers": ["npm"],
+      "matchPackageNames": [
+        "prettier",
+        "prettier-plugin-*",
+        "@prettier/**"
+      ],
+      "groupName": "prettier"
+    },
+    {
+      "description": "Group Jest test framework",
+      "matchManagers": ["npm"],
+      "matchPackageNames": [
+        "jest",
+        "jest-*",
+        "@jest/**",
+        "ts-jest",
+        "babel-jest"
+      ],
+      "groupName": "jest"
+    },
+    {
+      "description": "Group Vitest test framework",
+      "matchManagers": ["npm"],
+      "matchPackageNames": [
+        "vitest",
+        "@vitest/**"
+      ],
+      "groupName": "vitest"
+    },
+    {
+      "description": "Group Playwright end-to-end test framework",
+      "matchManagers": ["npm"],
+      "matchPackageNames": [
+        "@playwright/**",
+        "playwright",
+        "playwright-*"
+      ],
+      "groupName": "playwright"
+    },
+    {
+      "description": "Group Cypress end-to-end test framework",
+      "matchManagers": ["npm"],
+      "matchPackageNames": [
+        "cypress",
+        "@cypress/**"
+      ],
+      "groupName": "cypress"
+    },
+    {
+      "description": "Group TypeScript type definition packages",
+      "matchManagers": ["npm"],
+      "matchPackageNames": [
+        "@types/**"
+      ],
+      "groupName": "type definitions",
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
+    },
+    {
+      "description": "Group Babel transpiler core + plugins + presets",
+      "matchManagers": ["npm"],
+      "matchPackageNames": [
+        "@babel/**",
+        "babel-*"
+      ],
+      "groupName": "babel"
+    },
+    {
+      "description": "Group webpack bundler core + loaders + plugins",
+      "matchManagers": ["npm"],
+      "matchPackageNames": [
+        "webpack",
+        "webpack-*",
+        "*-webpack-plugin",
+        "*-loader"
+      ],
+      "groupName": "webpack"
+    },
+    {
+      "description": "Group non-major devDependencies",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "node dev dependencies (non-major)"
+    }
+  ]
+}

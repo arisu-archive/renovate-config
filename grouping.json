@@ -1,0 +1,13 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Group rules. Bundle non-major minor/patch updates to reduce PR noise; keep majors separate. Language-specific grouping belongs in each language preset.",
+  "extends": ["group:allNonMajor"],
+  "packageRules": [
+    {
+      "description": "Separate major updates so breaking changes get their own PR",
+      "matchUpdateTypes": ["major"],
+      "groupName": null,
+      "groupSlug": null
+    }
+  ]
+}
